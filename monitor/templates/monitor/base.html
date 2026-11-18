@@ -1,0 +1,30 @@
+{% load static %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}VisionSegura{% endblock %} · VisionSegura</title>
+  <link rel="stylesheet" href="{% static 'monitor/estilos.css' %}">
+</head>
+<body>
+  <header class="barra">
+    <a class="marca" href="{% url 'panel' %}">
+      <span class="logo">◉</span> VisionSegura
+      <small>Monitor de EPP y objetos · Laboratorio</small>
+    </a>
+    <nav>
+      {% with n=request.resolver_match.url_name %}
+      <a href="{% url 'panel' %}" class="{% if n == 'panel' %}activo{% endif %}">En vivo</a>
+      <a href="{% url 'analizar' %}" class="{% if n == 'analizar' %}activo{% endif %}">Analizar imagen</a>
+      <a href="{% url 'reportes' %}" class="{% if n == 'reportes' %}activo{% endif %}">Reportes</a>
+      <a href="{% url 'admin:index' %}">Admin</a>
+      {% endwith %}
+    </nav>
+  </header>
+  <main class="contenedor">
+    {% block contenido %}{% endblock %}
+  </main>
+  <footer class="pie">Django · OpenCV (YOLOv4-tiny + YuNet) · PostgreSQL</footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

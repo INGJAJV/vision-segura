@@ -1,0 +1,118 @@
+Fecha de ejecucion: mi� 18/11/2026 15:13:42,60  
+Found 68 test(s).
+Creating test database for alias 'default' ('test_vision_segura')...
+
+Got an error creating the test database: la base de datos «test_vision_segura» ya existe
+
+Destroying old test database for alias 'default' ('test_vision_segura')...
+
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, monitor, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying monitor.0001_initial... OK
+  Applying monitor.0002_reglas_iniciales... OK
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).
+test_desactivar_regla_desde_la_web_detiene_las_incidencias (monitor.tests.test_integracion.IntegracionTests.test_desactivar_regla_desde_la_web_detiene_las_incidencias) ... ok
+test_enfriamiento_con_bd_real_evita_duplicados (monitor.tests.test_integracion.IntegracionTests.test_enfriamiento_con_bd_real_evita_duplicados) ... ok
+test_incidencia_detectada_aparece_en_api_reportes_y_csv (monitor.tests.test_integracion.IntegracionTests.test_incidencia_detectada_aparece_en_api_reportes_y_csv) ... ok
+test_marcar_revisada_se_refleja_en_el_csv (monitor.tests.test_integracion.IntegracionTests.test_marcar_revisada_se_refleja_en_el_csv) ... ok
+test_persona_con_mascarilla_no_genera_incidencia (monitor.tests.test_integracion.IntegracionTests.test_persona_con_mascarilla_no_genera_incidencia) ... ok
+test_persona_sin_mascarilla_se_guarda_en_la_bd_con_foto (monitor.tests.test_integracion.IntegracionTests.test_persona_sin_mascarilla_se_guarda_en_la_bd_con_foto) ... ok
+test_reglas_iniciales_controlan_el_servicio (monitor.tests.test_integracion.IntegracionTests.test_reglas_iniciales_controlan_el_servicio) ... ok
+test_rutas_principales_responden_y_comparten_navegacion (monitor.tests.test_integracion.IntegracionTests.test_rutas_principales_responden_y_comparten_navegacion) ... ok
+test_archivo_que_no_es_imagen (monitor.tests.test_vistas.AnalizarImagenTests.test_archivo_que_no_es_imagen) ... ok
+test_imagen_valida_devuelve_resultado (monitor.tests.test_vistas.AnalizarImagenTests.test_imagen_valida_devuelve_resultado) ... ok
+test_registrar_incidencia_guarda_la_captura (monitor.tests.test_vistas.RepositorioTests.test_registrar_incidencia_guarda_la_captura) ... ok
+test_reglas_activas (monitor.tests.test_vistas.RepositorioTests.test_reglas_activas) ... ok
+test_activar_y_desactivar_regla (monitor.tests.test_vistas.VistasTests.test_activar_y_desactivar_regla) ... ok
+test_api_estado_incluye_resumen_del_dia (monitor.tests.test_vistas.VistasTests.test_api_estado_incluye_resumen_del_dia) ... ok
+test_exportar_csv (monitor.tests.test_vistas.VistasTests.test_exportar_csv) ... ok
+test_marcar_revisada (monitor.tests.test_vistas.VistasTests.test_marcar_revisada) ... ok
+test_migracion_crea_las_reglas (monitor.tests.test_vistas.VistasTests.test_migracion_crea_las_reglas) ... ok
+test_panel_muestra_las_reglas (monitor.tests.test_vistas.VistasTests.test_panel_muestra_las_reglas) ... ok
+test_regla_inexistente_404 (monitor.tests.test_vistas.VistasTests.test_regla_inexistente_404) ... ok
+test_regla_solo_acepta_post (monitor.tests.test_vistas.VistasTests.test_regla_solo_acepta_post) ... ok
+test_reportes_con_fecha_invalida_usa_hoy (monitor.tests.test_vistas.VistasTests.test_reportes_con_fecha_invalida_usa_hoy) ... ok
+test_reportes_y_filtro_por_tipo (monitor.tests.test_vistas.VistasTests.test_reportes_y_filtro_por_tipo) ... ok
+test_cabello_es_sin_casco (monitor.tests.test_clasificador_epp.CascoTests.test_cabello_es_sin_casco) ... ok
+test_cabeza_cortada_por_el_borde_es_indeterminado (monitor.tests.test_clasificador_epp.CascoTests.test_cabeza_cortada_por_el_borde_es_indeterminado) ... ok
+test_casco_amarillo (monitor.tests.test_clasificador_epp.CascoTests.test_casco_amarillo) ... ok
+test_funciona_con_piel_oscura (monitor.tests.test_clasificador_epp.MascarillaTests.test_funciona_con_piel_oscura) ... ok
+test_mascarilla_azul (monitor.tests.test_clasificador_epp.MascarillaTests.test_mascarilla_azul) ... ok
+test_mascarilla_blanca (monitor.tests.test_clasificador_epp.MascarillaTests.test_mascarilla_blanca) ... ok
+test_rostro_descubierto_es_sin_mascarilla (monitor.tests.test_clasificador_epp.MascarillaTests.test_rostro_descubierto_es_sin_mascarilla) ... ok
+test_rostro_lejano_es_indeterminado (monitor.tests.test_clasificador_epp.MascarillaTests.test_rostro_lejano_es_indeterminado) ... ok
+test_sin_puntos_usa_proporciones_del_rostro (monitor.tests.test_clasificador_epp.MascarillaTests.test_sin_puntos_usa_proporciones_del_rostro) ... ok
+test_imagen_oscura_activa_mejora_de_iluminacion (monitor.tests.test_detectores.AnalizadorTests.test_imagen_oscura_activa_mejora_de_iluminacion) ... ok
+test_imagen_vacia_no_tiene_objetos (monitor.tests.test_detectores.DetectorObjetosTests.test_imagen_vacia_no_tiene_objetos) ... ok
+test_sin_modelo_lanza_error_claro (monitor.tests.test_detectores.DetectorObjetosTests.test_sin_modelo_lanza_error_claro) ... ok
+test_sin_yunet_usa_haar (monitor.tests.test_detectores.DetectorRostrosTests.test_sin_yunet_usa_haar) ... ok
+test_yunet_en_imagen_vacia (monitor.tests.test_detectores.DetectorRostrosTests.test_yunet_en_imagen_vacia) ... ok
+test_cu01_inicio_muestra_el_panel_en_vivo (monitor.tests.test_funcional.CasosDeUsoTests.test_cu01_inicio_muestra_el_panel_en_vivo) ... ok
+test_cu02_navegacion_entre_secciones (monitor.tests.test_funcional.CasosDeUsoTests.test_cu02_navegacion_entre_secciones) ... ok
+test_cu03_video_entrega_fotogramas_anotados (monitor.tests.test_funcional.CasosDeUsoTests.test_cu03_video_entrega_fotogramas_anotados) ... ok
+test_cu03_video_muestra_la_alerta_roja_ante_una_infraccion (monitor.tests.test_funcional.CasosDeUsoTests.test_cu03_video_muestra_la_alerta_roja_ante_una_infraccion) ... ok
+test_cu04_interfaz_recibe_metricas_y_alertas (monitor.tests.test_funcional.CasosDeUsoTests.test_cu04_interfaz_recibe_metricas_y_alertas) ... ok
+test_cu05_cambiar_regla_sin_token_csrf_es_rechazado (monitor.tests.test_funcional.CasosDeUsoTests.test_cu05_cambiar_regla_sin_token_csrf_es_rechazado) ... ok
+test_cu05_desactivar_regla_desde_la_interfaz (monitor.tests.test_funcional.CasosDeUsoTests.test_cu05_desactivar_regla_desde_la_interfaz) ... ok
+test_cu06_analizar_imagen_subida (monitor.tests.test_funcional.CasosDeUsoTests.test_cu06_analizar_imagen_subida) ... ok
+test_cu06_archivo_que_no_es_imagen_muestra_error (monitor.tests.test_funcional.CasosDeUsoTests.test_cu06_archivo_que_no_es_imagen_muestra_error) ... ok
+test_cu07_consultar_y_exportar_reportes (monitor.tests.test_funcional.CasosDeUsoTests.test_cu07_consultar_y_exportar_reportes) ... ok
+test_amarillo_es_color_de_casco (monitor.tests.test_procesamiento.ColorCascoTests.test_amarillo_es_color_de_casco) ... ok
+test_cabello_y_piel_no_son_casco (monitor.tests.test_procesamiento.ColorCascoTests.test_cabello_y_piel_no_son_casco) ... ok
+test_detecta_piel_clara_y_oscura (monitor.tests.test_procesamiento.PielTests.test_detecta_piel_clara_y_oscura) ... ok
+test_imagen_vacia_devuelve_cero (monitor.tests.test_procesamiento.PielTests.test_imagen_vacia_devuelve_cero) ... ok
+test_labios_cuentan_solo_con_rango_ampliado (monitor.tests.test_procesamiento.PielTests.test_labios_cuentan_solo_con_rango_ampliado) ... ok
+test_mascarilla_azul_no_es_piel (monitor.tests.test_procesamiento.PielTests.test_mascarilla_azul_no_es_piel) ... ok
+test_decodificar_basura_lanza_error (monitor.tests.test_procesamiento.UtilidadesTests.test_decodificar_basura_lanza_error) ... ok
+test_jpeg_ida_y_vuelta (monitor.tests.test_procesamiento.UtilidadesTests.test_jpeg_ida_y_vuelta) ... ok
+test_mejorar_iluminacion_aumenta_contraste_en_imagen_oscura (monitor.tests.test_procesamiento.UtilidadesTests.test_mejorar_iluminacion_aumenta_contraste_en_imagen_oscura) ... ok
+test_recortar_coords_invertidas_devuelve_vacio (monitor.tests.test_procesamiento.UtilidadesTests.test_recortar_coords_invertidas_devuelve_vacio) ... ok
+test_recortar_no_sale_del_borde (monitor.tests.test_procesamiento.UtilidadesTests.test_recortar_no_sale_del_borde) ... ok
+test_redimensionar_mantiene_proporcion (monitor.tests.test_procesamiento.UtilidadesTests.test_redimensionar_mantiene_proporcion) ... ok
+test_texto_ascii_quita_tildes (monitor.tests.test_procesamiento.UtilidadesTests.test_texto_ascii_quita_tildes) ... ok
+test_casco_solo_se_evalua_si_la_regla_esta_activa (monitor.tests.test_servicio.ServicioTests.test_casco_solo_se_evalua_si_la_regla_esta_activa) ... ok
+test_enfriamiento_evita_duplicados (monitor.tests.test_servicio.ServicioTests.test_enfriamiento_evita_duplicados) ... ok
+test_error_de_bd_no_detiene_el_video (monitor.tests.test_servicio.ServicioTests.test_error_de_bd_no_detiene_el_video) ... No se pudo registrar la incidencia celular
+Traceback (most recent call last):
+  File "C:\Users\av166\OneDrive\Desktop\vision-segura-main\monitor\vision\servicio.py", line 127, in _registrar
+    self.repo.registrar_incidencia(clave, confianza, personas, proc.codificar_jpeg(frame, 85))
+  File "C:\Users\av166\OneDrive\Desktop\vision-segura-main\monitor\tests\test_servicio.py", line 45, in registrar_incidencia
+    raise RuntimeError("BD caída")
+RuntimeError: BD caída
+ok
+test_estado_resume_el_ultimo_frame (monitor.tests.test_servicio.ServicioTests.test_estado_resume_el_ultimo_frame) ... ok
+test_interrupcion_reinicia_la_confirmacion (monitor.tests.test_servicio.ServicioTests.test_interrupcion_reinicia_la_confirmacion) ... ok
+test_no_registra_antes_de_confirmar (monitor.tests.test_servicio.ServicioTests.test_no_registra_antes_de_confirmar) ... ok
+test_persona_sin_mascarilla (monitor.tests.test_servicio.ServicioTests.test_persona_sin_mascarilla) ... ok
+test_registra_al_confirmar_n_frames (monitor.tests.test_servicio.ServicioTests.test_registra_al_confirmar_n_frames) ... ok
+test_regla_inactiva_no_genera_incidencia (monitor.tests.test_servicio.ServicioTests.test_regla_inactiva_no_genera_incidencia) ... ok
+
+----------------------------------------------------------------------
+Ran 68 tests in 47.025s
+
+OK
+Destroying test database for alias 'default' ('test_vision_segura')...
+

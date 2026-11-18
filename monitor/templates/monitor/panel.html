@@ -1,0 +1,77 @@
+{% extends "monitor/base.html" %}
+{% load static %}
+{% block titulo %}En vivo{% endblock %}
+{% block contenido %}
+{% csrf_token %}
+<div class="rejilla-panel">
+  <section class="tarjeta video-tarjeta">
+    <div class="video-cabecera">
+      <h2>Cámara del laboratorio</h2>
+      <span id="estado-camara" class="pastilla">Conectando…</span>
+    </div>
+    <div class="video-marco">
+      <img id="video" src="{% url 'video' %}" alt="Video en vivo con detecciones">
+    </div>
+    <div id="banner-alerta" class="banner-alerta oculto"></div>
+    <div class="leyenda">
+      <span><i class="punto rojo"></i> Infracción</span>
+      <span><i class="punto verde"></i> Cumple</span>
+      <span><i class="punto azul"></i> Objeto detectado</span>
+      <span id="motores" class="tenue"></span>
+    </div>
+  </section>
+
+  <aside class="columna">
+    <div class="metricas">
+      <div class="metrica"><span id="m-personas">0</span><small>Personas</small></div>
+      <div class="metrica verde"><span id="m-con-mascarilla">0</span><small>Con mascarilla</small></div>
+      <div class="metrica rojo"><span id="m-sin-mascarilla">0</span><small>Sin mascarilla</small></div>
+      <div class="metrica"><span id="m-incidencias">0</span><small>Incidencias hoy</small></div>
+    </div>
+
+    <section class="tarjeta">
+      <h3>Reglas del laboratorio</h3>
+      <ul class="reglas">
+        {% for regla in reglas %}
+        <li>
+          <div>
+            <strong>{{ regla.get_clave_display }}</strong>
+            <small>{{ regla.descripcion }}</small>
+          </div>
+          <label class="interruptor">
+            <input type="checkbox" data-regla="{{ regla.clave }}" {% if regla.activa %}checked{% endif %}>
+            <span></span>
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="tarjeta">
+      <h3>Objetos en cámara <small id="m-fps" class="tenue"></small></h3>
+      <div id="objetos" class="chips"><span class="tenue">Ninguno</span></div>
+    </section>
+
+    <section class="tarjeta">
+      <h3>Últimas incidencias</h3>
+      <ul id="incidencias" class="incidencias">
+        {% for i in incidencias %}
+        <li>{% if i.captura %}<img src="{{ i.captura.url }}" alt="">{% endif %}
+          <div><strong>{{ i.get_tipo_display }}</strong><small>{{ i.fecha_hora|time:"H:i:s" }} · {{ i.confianza|floatformat:0 }}%</small></div></li>
+        {% empty %}
+        <li class="tenue">Sin incidencias hoy</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="tarjeta">
+      <h3>Actividad del sistema</h3>
+      <ul id="eventos" class="eventos"></ul>
+    </section>
+  </aside>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.URL_ESTADO = "{% url 'api_estado' %}"; window.URL_REGLA = "{% url 'api_regla' 'CLAVE' %}";</script>
+<script src="{% static 'monitor/panel.js' %}"></script>
+{% endblock %}

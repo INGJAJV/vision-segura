@@ -1,0 +1,30 @@
+# Entorno virtual (la guía exige NO subirlo)
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Configuración local y secretos
+.env
+
+# Archivos generados
+media/
+staticfiles/
+db.sqlite3
+
+# Modelos pre-entrenados (se descargan con: python manage.py descargar_modelos)
+modelos_ia/*
+!modelos_ia/.gitkeep
+
+# Editor / sistema
+.DS_Store
+.vscode/
+.idea/
+.playwright-mcp/
+
+.venv-*/
+htmlcov/
+.coverage

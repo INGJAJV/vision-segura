@@ -1,0 +1,16 @@
+[run]
+source = monitor, config
+omit =
+    */migrations/*
+    */tests/*
+    config/wsgi.py
+    config/asgi.py
+concurrency = thread
+
+[report]
+show_missing = True
+skip_empty = True
+
+[html]
+directory = htmlcov
+title = Cobertura de pruebas - VisionSegura

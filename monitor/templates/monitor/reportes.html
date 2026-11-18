@@ -1,0 +1,64 @@
+{% extends "monitor/base.html" %}
+{% block titulo %}Reportes{% endblock %}
+{% block contenido %}
+<section class="tarjeta">
+  <div class="fila-filtros">
+    <h2>Incidencias del {{ fecha|date:"d/m/Y" }}</h2>
+    <form method="get" class="filtros">
+      {{ form.fecha }} {{ form.tipo }}
+      <button class="boton" type="submit">Filtrar</button>
+      <a class="boton secundario" href="{% url 'exportar_csv' %}?fecha={{ fecha|date:'Y-m-d' }}&tipo={{ tipo }}">Exportar CSV</a>
+    </form>
+  </div>
+
+  <div class="metricas cuatro">
+    <div class="metrica"><span>{{ total }}</span><small>Incidencias</small></div>
+    <div class="metrica rojo"><span>{{ pendientes }}</span><small>Sin revisar</small></div>
+    {% for t in por_tipo|slice:":2" %}
+    <div class="metrica"><span>{{ t.total }}</span><small>{{ t.tipo }}</small></div>
+    {% endfor %}
+  </div>
+
+  <h3>Incidencias por hora</h3>
+  <div class="grafico">
+    {% for h in horas %}
+    <div class="barra-col" title="{{ h.hora }}:00 → {{ h.total }}">
+      <span class="valor">{% if h.total %}{{ h.total }}{% endif %}</span>
+      <div class="barra-relleno" style="height: {{ h.alto }}%"></div>
+      <small>{{ h.hora }}h</small>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="tarjeta">
+  <h3>Detalle</h3>
+  <div class="tabla-scroll">
+  <table class="tabla">
+    <thead><tr><th>Captura</th><th>Tipo</th><th>Hora</th><th>Confianza</th><th>Personas</th><th>Estado</th></tr></thead>
+    <tbody>
+    {% for i in incidencias %}
+      <tr class="{% if i.revisada %}revisada{% endif %}">
+        <td>{% if i.captura %}<a href="{{ i.captura.url }}" target="_blank"><img class="miniatura" src="{{ i.captura.url }}" alt=""></a>{% endif %}</td>
+        <td>{{ i.get_tipo_display }}</td>
+        <td>{{ i.fecha_hora|time:"H:i:s" }}</td>
+        <td>{{ i.confianza|floatformat:0 }}%</td>
+        <td>{{ i.personas }}</td>
+        <td>
+          <form method="post" action="{% url 'incidencia_revisar' i.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="siguiente" value="{{ request.get_full_path }}">
+            <button class="boton pequeno {% if i.revisada %}secundario{% endif %}" type="submit">
+              {% if i.revisada %}✔ Revisada{% else %}Marcar revisada{% endif %}
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="6" class="tenue">No hay incidencias para este filtro.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}

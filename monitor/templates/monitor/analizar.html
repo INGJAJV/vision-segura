@@ -1,0 +1,70 @@
+{% extends "monitor/base.html" %}
+{% block titulo %}Analizar imagen{% endblock %}
+{% block contenido %}
+<div class="rejilla-panel">
+  <section class="tarjeta">
+    <h2>Analizar una imagen</h2>
+    <p class="tenue">Sube una foto (por ejemplo, de una persona con casco o mascarilla) y el
+      sistema aplica el mismo análisis que en el video en vivo.</p>
+    <form method="post" enctype="multipart/form-data" class="formulario">
+      {% csrf_token %}
+      {{ form.imagen }}
+      {% for e in form.imagen.errors %}<p class="error">{{ e }}</p>{% endfor %}
+      <small class="tenue">{{ form.imagen.help_text }}</small>
+      <button type="submit" class="boton">Analizar</button>
+    </form>
+    {% if imagen_b64 %}
+    <div class="video-marco resultado-img">
+      <img src="data:image/jpeg;base64,{{ imagen_b64 }}" alt="Imagen analizada con detecciones">
+    </div>
+    {% endif %}
+  </section>
+
+  <aside class="columna">
+    {% if resultado %}
+    <div class="metricas">
+      <div class="metrica"><span>{{ resultado.personas }}</span><small>Personas</small></div>
+      <div class="metrica"><span>{{ resultado.objetos|length }}</span><small>Objetos</small></div>
+    </div>
+    <section class="tarjeta">
+      <h3>Infracciones</h3>
+      {% for inf in infracciones %}
+        <p class="aviso rojo">{{ inf.nombre }} <small>({{ inf.confianza|floatformat:0 }}%)</small></p>
+      {% empty %}
+        <p class="aviso verde">Ninguna infracción detectada</p>
+      {% endfor %}
+    </section>
+    <section class="tarjeta">
+      <h3>Rostros</h3>
+      <ul class="lista-simple">
+      {% for r in resultado.rostros %}
+        <li>Rostro {{ forloop.counter }}:
+          {% if r.mascarilla is True %}<b class="txt-verde">con mascarilla</b>{% elif r.mascarilla is False %}<b class="txt-rojo">sin mascarilla</b>{% else %}mascarilla indeterminada{% endif %}
+          ·
+          {% if r.casco is True %}<b class="txt-verde">con casco</b>{% elif r.casco is False %}<b class="txt-rojo">sin casco</b>{% else %}casco indeterminado{% endif %}
+        </li>
+      {% empty %}<li class="tenue">No se detectaron rostros</li>{% endfor %}
+      </ul>
+    </section>
+    <section class="tarjeta">
+      <h3>Objetos</h3>
+      <div class="chips">
+        {% for o in resultado.objetos %}<span class="chip">{{ o.etiqueta }} {{ o.confianza|floatformat:0 }}%</span>
+        {% empty %}<span class="tenue">Ninguno</span>{% endfor %}
+      </div>
+      <p class="tenue">Brillo medio: {{ resultado.brillo }}{% if resultado.iluminacion_mejorada %} · se aplicó mejora de iluminación (CLAHE){% endif %}</p>
+    </section>
+    {% else %}
+    <section class="tarjeta">
+      <h3>¿Qué detecta?</h3>
+      <ul class="lista-simple">
+        <li><b>Objetos</b> (YOLOv4-tiny, 80 clases): celular, laptop, botella, mochila…</li>
+        <li><b>Rostros</b> (YuNet) con 5 puntos de referencia.</li>
+        <li><b>Mascarilla</b>: compara la piel de la zona nariz-boca con la frente.</li>
+        <li><b>Casco</b>: busca colores de casco sobre la cabeza.</li>
+      </ul>
+    </section>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}
